@@ -81,6 +81,7 @@ API documentation
 ### Arguments
 
 typeAndIdentifier
+
 Itentifier, prototype
 
 ### Example
