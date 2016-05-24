@@ -69,7 +69,8 @@ _.appendString = function (str) {
     return this + str;
 };
 
-_(9).appendString(' times'); // '9 times'
+_(9).appendString(' times');       // '9 times'
+_('Hello').appendString(' world'); // 'Hello world'
 ```
 
 API documentation
