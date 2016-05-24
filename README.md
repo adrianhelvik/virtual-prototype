@@ -118,6 +118,22 @@ Define a method on the virtual prototype for the given
 type. &lt;type&gt; must be defined using `defineType`
 and must match the first parameter given to `defineType`.
 
+### Example
+
+```javascript
+_.defineType('string');
+
+_.string.define('reverse', function () {
+    var result = '';
+
+    for (var i = this.length - 1; i >= 0; i--) {
+        result += this[i];
+    }
+
+    return result;
+});
+```
+
 \_.finalize
 -----------
 
