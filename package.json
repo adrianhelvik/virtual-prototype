@@ -1,7 +1,11 @@
 {
   "name": "virtual-prototype",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create utility methods without adding them directly to prototypes",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/adrianhelvik/virtual-prototype.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "node tests.js"
