@@ -82,7 +82,7 @@ API documentation
 
 typeAndIdentifier
 
-Itentifier, prototype
+Itentifier, constructor
 
 ### Example
 
@@ -121,6 +121,8 @@ and must match the first parameter given to `defineType`.
 ### Example
 
 ```javascript
+
+// Using just type (matched with typeof)
 _.defineType('string');
 
 _.string.define('reverse', function () {
@@ -131,6 +133,18 @@ _.string.define('reverse', function () {
     }
 
     return result;
+});
+
+// Using constructor (matched with instanceof)
+_.defineType('array', Array);
+
+_.array.define('reverse', function () {
+    for (var i = 0, j = this.length - 1; i < this.length/2; i++, j--) {
+        var tmp = this[i];
+        this[i] = this[j];
+        this[j] = tmp;
+    }
+    return this;
 });
 ```
 
