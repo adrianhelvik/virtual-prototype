@@ -1,0 +1,11 @@
+{
+  "name": "virtual-prototype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
