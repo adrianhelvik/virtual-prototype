@@ -37,7 +37,7 @@ var _ = VirtualPrototype();
 _.defineType('string');       // checks type with typeof
 _.defineType('array', Array); // checks type with instanceof
 
-// ..define the method on the virtual prototype.
+// ..define the methods on the virtual prototypes.
 
 _.string.define('secondCharacter', function () {
     if (this.length < 2)
