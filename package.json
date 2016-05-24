@@ -1,6 +1,6 @@
 {
   "name": "virtual-prototype",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create utility methods without adding them directly to prototypes",
   "repository": {
       "type": "git",
