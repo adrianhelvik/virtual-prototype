@@ -61,7 +61,7 @@ _([1, 2, 3]).last();          // 3
 Creating general methods
 ------------------------
 
-```
+```javascript
 var virtualPrototype = require('virtual-prototype');
 var _ = virtualPrototype();
 
