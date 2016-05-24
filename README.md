@@ -17,7 +17,7 @@ Usage
 =====
 
 My recommended way to use this module is to create a extensions module for your
-project that exports an instance of VirtualPrototype. Then you can import that
+project that exports an instance of `VirtualPrototype`. Then you can import that
 module throughout your project.
 
 Another way to use the module would be to create an npm package containing
@@ -151,7 +151,7 @@ _.array.define('reverse', function () {
 \_.finalize
 -----------
 
-Prevent further changes to the instance of VirtualPrototype.
+Prevent further changes to the instance of `VirtualPrototype`.
 After this, no new methods can be registered and no methods
 can be altered/deleted.
 
@@ -163,6 +163,6 @@ Testing
 Notes
 =====
 
-* Overriding functions using define('') for a given type is illegal and will throw a TypeError.
-* null/undefined can not be captured by `_()` as they can not be referenced by `this`. Throws a TypeError.
+* Overriding functions using `define(<existing-name>, <handler>)` for a given type is illegal and will throw a `TypeError`.
+* null/undefined can not be captured by `_()` as they can not be referenced by `this`. Throws a `TypeError`.
 
