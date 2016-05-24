@@ -17,7 +17,7 @@ Usage
 =====
 
 My recommended way to use this module is to create a extensions module for your
-project that exports an instance of virtualPrototype. Then you can import that
+project that exports an instance of VirtualPrototype. Then you can import that
 module throughout your project.
 
 Another way to use the module would be to create an npm package containing
@@ -29,8 +29,8 @@ Virtually extending types
 -------------------------
 
 ```javascript
-var virtualPrototype = require('virtual-prototype')
-var _ = virtualPrototype();
+var VirtualPrototype = require('virtual-prototype')
+var _ = VirtualPrototype();
 
 // define the types you wish to "extend"..
 
@@ -62,8 +62,8 @@ Creating general methods
 ------------------------
 
 ```javascript
-var virtualPrototype = require('virtual-prototype');
-var _ = virtualPrototype();
+var VirtualPrototype = require('virtual-prototype');
+var _ = VirtualPrototype();
 
 _.appendString = function (str) {
     return this + str;
