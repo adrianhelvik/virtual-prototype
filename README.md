@@ -108,7 +108,7 @@ _.define('toUppercaseString', function () {
     return this.toString().toUpperCase();
 })
 
-_(<non-null, non-undefined value>).toUppercaseString();
+_({}).toUppercaseString(); // '[OBJECT OBJECT]'
 ```
 
 \_.&lt;type&gt;.define
