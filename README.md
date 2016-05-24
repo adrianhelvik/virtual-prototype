@@ -10,9 +10,6 @@ I present to you a much safer solution. A wrapper that enables you to define met
 on top of any type (except null and undefined), so that you can keep things nice
 and object oriented!
 
-To prevent dependency hell, you must first instantiate the module, as npm based
-singletons are inherently unsafe, and should not contain state.
-
 Usage
 =====
 
