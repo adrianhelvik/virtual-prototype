@@ -135,7 +135,7 @@ _.string.define('reverse', function () {
     return result;
 });
 
-// Using constructor (matched with instanceof)
+// Using constructor function as second argument (matched with instanceof)
 _.defineType('array', Array);
 
 _.array.define('reverse', function () {
