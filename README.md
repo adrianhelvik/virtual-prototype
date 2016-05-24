@@ -164,5 +164,5 @@ Notes
 =====
 
 * Overriding functions using define('') for a given type is illegal and will throw a TypeError.
-* null/undefined can not be captured by `_()` as they can not be referenced by this. Throws a TypeError.
+* null/undefined can not be captured by `_()` as they can not be referenced by `this`. Throws a TypeError.
 
