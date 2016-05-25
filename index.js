@@ -1,6 +1,7 @@
 module.exports = function VirtualPrototypeContainer() {
     'use strict';
 
+    // TODO: Replace with proxy if supported
     var _ = function (x) {
         if (x == null) {
             throw TypeError('virtual-prototype: Cannot call extended functions on undefined or null');
@@ -9,7 +10,9 @@ module.exports = function VirtualPrototypeContainer() {
         var result = {};
 
         Object.keys(_._funcs).forEach(function (name) {
-            result[name] = _._funcs[name].bind(x);
+            result[name] = function () {
+                return _._funcs[name].apply(x, arguments);
+            };
         });
 
         return result;
