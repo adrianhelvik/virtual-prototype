@@ -8,7 +8,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "node tests.js"
+    "test": "node tests.js",
+    "browserify": "browserify tests.js -o browserified-tests.js"
   },
   "author": "",
   "license": "ISC"

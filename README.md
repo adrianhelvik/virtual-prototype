@@ -156,11 +156,29 @@ can be altered/deleted.
 Testing
 =======
 
+Node
+----
+
 `npm test`
+
+Browser
+-------
+
+`npm install --global browserify`
+`npm run browserify`
+`open browsers-test.html` (and copy the url to the browser you wish to test in)
+
+Tested in
+---------
+
+* Node v4.2.0
+* Chrome 50.0.2661.102
+* Safari 9.1.1
+* Firefox 46.0.1
+* IE11
 
 Notes
 =====
 
 * Overriding functions using `define(<existing-name>, <handler>)` for a given type is illegal and will throw a `TypeError`.
 * null/undefined can not be captured by `vp()` as they can not be referenced by `this`. Throws a `TypeError`.
-

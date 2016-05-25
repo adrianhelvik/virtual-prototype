@@ -1,3 +1,104 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = function VirtualPrototypeContainer() {
+    'use strict';
+
+    // TODO: Replace with proxy if supported
+    var _ = function (x) {
+        if (x == null) {
+            throw TypeError('virtual-prototype: Cannot call extended functions on undefined or null');
+        }
+
+        var result = {};
+
+        Object.keys(_._funcs).forEach(function (name) {
+            result[name] = function () {
+                return _._funcs[name].apply(x, arguments);
+            };
+        });
+
+        return result;
+    };
+
+    function define(name, fn) {
+        if (typeof name != 'string' && ! (name instanceof String))
+            throw TypeError('virtual-prototype: define was passed non string as name. Got ' + name);
+
+        if (typeof fn != 'function')
+            throw TypeError('virtual-prototype: define was passed non function for "' + name + '". Got ' + fn);
+
+        _._funcs[name] = fn;
+
+        return _;
+    }
+
+    _._funcs = {}
+
+    _._registered = {}; // for tracking which methods of specific types have been added
+
+    _.define = define;
+
+    _.get = function(name) {
+        return _._funcs[name];
+    }
+
+    function defineFactory(typeName, type) {
+        _._registered[typeName] = {};
+
+        return function (name, fn) {
+            var oldFn = _.get(name);
+
+            if (_._registered[typeName][name]) {
+                throw TypeError('virtual-prototype: Cannot redefine ' + name + ' for ' + typeName);
+            }
+
+            _._registered[typeName][name] = true;
+
+            return define(name, function () {
+                if (typeof type == 'string' || type instanceof String) {
+                    if (typeof this == type || (typeName === 'string' && this instanceof String)) {
+                        return fn.apply(this, arguments);
+                    }
+                } else {
+                    if (this instanceof type) {
+                        return fn.apply(this, arguments);
+                    }
+                }
+
+                if (! oldFn) {
+                    throw TypeError('virtual-prototype: ' + name + ' is not defined for ' + typeof this);
+                }
+
+                return oldFn.apply(this, arguments);
+            });
+        }
+    }
+
+    _.defineType = function (name, proto) {
+        if (! proto) {
+            _[name] = {
+                define: defineFactory(name, name)
+            }
+        } else {
+            _[name] = {
+                define: defineFactory(name, proto)
+            }
+        }
+    }
+
+    _.finalize = function () {
+        delete _.define;
+        delete _.defineType;
+
+        Object.freeze(_._funcs);
+        Object.freeze(_._registered);
+
+        delete _.finalize;
+    }
+
+    return _;
+};
+
+},{}],2:[function(require,module,exports){
 'use strict';
 
 var virtualPrototype = require('./index');
@@ -194,3 +295,5 @@ console.assert(
 var end = new Date();
 
 console.log('All tests passed in ' + _(start).diff(end) + 'ms!');
+
+},{"./index":1}]},{},[2]);

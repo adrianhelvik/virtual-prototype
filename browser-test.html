@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+    <meta charset="utf-8">
+
+    <body style="text-align:center; font-family: sans-serif;">
+
+        <script>
+
+            // Boilerplate code for module.exports, require and logging to work
+
+            window._modules = {};
+            window.ids = [
+                './index',
+                './tests'
+            ];
+            window._index = 0;
+            window.module = {};
+
+            Object.defineProperty(module, 'exports', {
+                get: function() {
+                    return {};
+                },
+                set: function(value) {
+                    var name = ids[_index++];
+
+                    return _modules[name] = value;
+                }
+            });
+
+            try {
+                window.oldConsole = console;
+            } catch (err) {
+                window.console = {};
+
+                console.log = function () {};
+                console.assert = function () {
+                    if (! arguments[0]) {
+                        throw Error('Assertion error: ' + arguments[1]);
+                    }
+                }
+            }
+
+            window.process = {
+                exit: function () {
+                    throw Error('Exited');
+                },
+                stdout: {
+                    write: function () {
+                        var fnStr = 'oldConsole.log(';
+
+                        for (var i = 0; i < arguments.length; i++) {
+                            fnStr += 'arguments['+i+'], ';
+                            document.body.innerHTML += arguments[i];
+                            oldConsole.log(arguments[i]);
+                        }
+
+                        document.body.innerHTML += '<br>';
+
+                        if (arguments.length > 0) {
+                            fnStr = fnStr.substring(0, fnStr.length - 2);
+                        }
+
+                        fnStr += ');';
+
+                        return new Function(fnStr).apply(null, arguments);
+                    }
+                }
+            };
+
+            window.console = {
+                log: function() {
+                    process.stdout.write.apply(null, arguments);
+                },
+                assert: function(assertion, msg) {
+                    if (! assertion) {
+                        throw Error('Assertion failed: ' + (msg || ''));
+                    }
+                    oldConsole.assert.apply(oldConsole, arguments);
+                }
+            };
+
+            window.require = function (name) {
+                return _modules[name];
+            }
+
+        </script>
+        <script src="browserified-tests.js"></script>
+
+        <script>
+        </script>
+    </body>
+</html>
