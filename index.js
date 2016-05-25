@@ -9,9 +9,7 @@ module.exports = function VirtualPrototypeContainer() {
         var result = {};
 
         Object.keys(_._funcs).forEach(function (name) {
-            result[name] = function () {
-                return _._funcs[name].apply(x, arguments);
-            };
+            result[name] = _._funcs[name].bind(x);
         });
 
         return result;
