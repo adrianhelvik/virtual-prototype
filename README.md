@@ -27,22 +27,22 @@ Virtually extending types
 
 ```javascript
 var VirtualPrototype = require('virtual-prototype')
-var _ = VirtualPrototype();
+var vp = VirtualPrototype();
 
 // define the types you wish to "extend"..
 
-_.defineType('string');       // checks type with typeof
-_.defineType('array', Array); // checks type with instanceof
+vp.defineType('string');       // checks type with typeof
+vp.defineType('array', Array); // checks type with instanceof
 
 // ..define the methods on the virtual prototypes.
 
-_.string.define('secondCharacter', function () {
+vp.string.define('secondCharacter', function () {
     if (this.length < 2)
         return '';
     return this.charAt(2);
 });
 
-_.array.define('last', function () {
+vp.array.define('last', function () {
     if (! this.length) {
         return null;
     }
@@ -50,9 +50,9 @@ _.array.define('last', function () {
     return this[this.length - 1];
 });
 
-_('hello').secondCharacter(); // 'e'
+vp('hello').secondCharacter(); // 'e'
 
-_([1, 2, 3]).last();          // 3
+vp([1, 2, 3]).last();          // 3
 ```
 
 Creating general methods
@@ -60,20 +60,20 @@ Creating general methods
 
 ```javascript
 var VirtualPrototype = require('virtual-prototype');
-var _ = VirtualPrototype();
+var vp = VirtualPrototype();
 
-_.appendString = function (str) {
+vp.appendString = function (str) {
     return this + str;
 };
 
-_(9).appendString(' times');       // '9 times'
-_('Hello').appendString(' world'); // 'Hello world'
+vp(9).appendString(' times');       // '9 times'
+vp('Hello').appendString(' world'); // 'Hello world'
 ```
 
 API documentation
 =================
 
-\_.defineType
+vp.defineType
 -------------
 
 ### Arguments
@@ -86,13 +86,13 @@ Itentifier, constructor
 
 ```javascript
 // Type checks using typeof (+ instanceof String if identifier is 'string')
-_.defineType('string');
+vp.defineType('string');
 
 // Type checks using instanceof
-_.defineType('array', Array);
+vp.defineType('array', Array);
 ```
 
-\_.define
+vp.define
 ---------
 
 ### Arguments:
@@ -102,14 +102,14 @@ name, handler
 ### Example
 
 ```javascript
-_.define('toUppercaseString', function () {
+vp.define('toUppercaseString', function () {
     return this.toString().toUpperCase();
 })
 
-_({}).toUppercaseString(); // '[OBJECT OBJECT]'
+vp({}).toUppercaseString(); // '[OBJECT OBJECT]'
 ```
 
-\_.&lt;type&gt;.define
+vp.&lt;type&gt;.define
 ------------------------
 
 Define a method on the virtual prototype for the given
@@ -121,9 +121,9 @@ and must match the first parameter given to `defineType`.
 ```javascript
 
 // Using just type (matched with typeof)
-_.defineType('string');
+vp.defineType('string');
 
-_.string.define('reverse', function () {
+vp.string.define('reverse', function () {
     var result = '';
 
     for (var i = this.length - 1; i >= 0; i--) {
@@ -134,9 +134,9 @@ _.string.define('reverse', function () {
 });
 
 // Using constructor function as second argument (matched with instanceof)
-_.defineType('array', Array);
+vp.defineType('array', Array);
 
-_.array.define('reverse', function () {
+vp.array.define('reverse', function () {
     for (var i = 0, j = this.length - 1; i < this.length/2; i++, j--) {
         var tmp = this[i];
         this[i] = this[j];
@@ -146,7 +146,7 @@ _.array.define('reverse', function () {
 });
 ```
 
-\_.finalize
+vp.finalize
 -----------
 
 Prevent further changes to the instance of `VirtualPrototype`.
@@ -162,5 +162,5 @@ Notes
 =====
 
 * Overriding functions using `define(<existing-name>, <handler>)` for a given type is illegal and will throw a `TypeError`.
-* null/undefined can not be captured by `_()` as they can not be referenced by `this`. Throws a `TypeError`.
+* null/undefined can not be captured by `vp()` as they can not be referenced by `this`. Throws a `TypeError`.
 
