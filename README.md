@@ -55,8 +55,8 @@ vp('hello').secondCharacter(); // 'e'
 vp([1, 2, 3]).last();          // 3
 ```
 
-Creating general methods
-------------------------
+Creating methods for all types
+------------------------------
 
 ```javascript
 var VirtualPrototype = require('virtual-prototype');
