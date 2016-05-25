@@ -164,9 +164,9 @@ Node
 Browser
 -------
 
-`npm install --global browserify`
-`npm run browserify`
-`open browsers-test.html` (and copy the url to the browser you wish to test in)
+* `npm install --global browserify`
+* `npm run browserify`
+* `open browsers-test.html` (and copy the url to the browser you wish to test in)
 
 Tested in
 ---------
