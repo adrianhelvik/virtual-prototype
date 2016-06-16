@@ -39,7 +39,7 @@ vp.defineType('array', Array); // checks type with instanceof
 vp.string.define('secondCharacter', function () {
     if (this.length < 2)
         return '';
-    return this.charAt(2);
+    return this.charAt(1);
 });
 
 vp.array.define('last', function () {
