@@ -55,11 +55,11 @@ module.exports = function VirtualPrototypeContainer() {
             return define(name, function () {
                 if (typeof type == 'string' || type instanceof String) {
                     if (typeof this == type || (typeName === 'string' && this instanceof String)) {
-                        return fn.apply(this, arguments);
+                        return transformObjectStrings(fn.apply(this, arguments));
                     }
                 } else {
                     if (this instanceof type) {
-                        return fn.apply(this, arguments);
+                        return transformObjectStrings(fn.apply(this, arguments));
                     }
                 }
 
@@ -96,3 +96,10 @@ module.exports = function VirtualPrototypeContainer() {
 
     return _;
 };
+
+function transformObjectStrings(val) {
+    if (typeof val === 'string' || val instanceof String) {
+        return val + '';
+    }
+    return val;
+}

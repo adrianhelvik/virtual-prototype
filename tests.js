@@ -39,6 +39,10 @@ _.string.define('contains', function (other) {
     return (typeof other == 'string') && this.indexOf(other) !== -1;
 });
 
+_.string.define('newString', function () {
+    return new String(this);
+});
+
 _.number.define('isPositive', function () {
     return this > 0;
 });
@@ -189,6 +193,10 @@ console.assert(
 console.assert(
     _(new Date(1000)).diff(new Date(100)) === 900,
     '_(Date).diff() should show the difference between two Date objects in ms.'
+);
+
+console.assert(
+    _('hello').newString() === 'hello'
 );
 
 var end = new Date();
